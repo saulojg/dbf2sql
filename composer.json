@@ -1,0 +1,29 @@
+{
+    "name": "orbital/dbf2sql",
+    "version": "0.0.1",
+    "type": "app",
+    "description": "Import dbf files into SQL databases",
+    "keywords": ["dbase", "postgresql", "dbf"],
+    "homepage": "https://orbital.com.ar",
+    "authors" : [
+        {
+            "name": "Saulo José Gil",
+            "email": "saulo.gil@orbital.com.ar"
+        }
+    ],
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/hisamu/php-xbase"
+      }
+    ],
+    "require": {
+      "php": ">=5.3.0",
+      "hisamu/php-xbase" : "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orbital\\Util\\": "src/"
+        }
+    }
+}

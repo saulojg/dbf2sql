@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "3a6c725586c53e5b16a682795de4ec1b",
+    "content-hash": "fb3dbaa40eec949ca436cfc892b72aba",
+    "packages": [
+        {
+            "name": "hisamu/php-xbase",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hisamu/php-xbase.git",
+                "reference": "9cebc632b78f8c5b894292351ea9edbf0e61f597"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hisamu/php-xbase/zipball/9cebc632b78f8c5b894292351ea9edbf0e61f597",
+                "reference": "9cebc632b78f8c5b894292351ea9edbf0e61f597",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "XBase": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Luã de Souza",
+                    "email": "lsouza@codeinc.com.br"
+                },
+                {
+                    "name": "Erwin Kooi",
+                    "email": "info@cyane.nl"
+                }
+            ],
+            "description": "A simple parser for *.dbf files using PHP",
+            "homepage": "https://github.com/hisamu/php-xbase",
+            "keywords": [
+                "dbase",
+                "foxpro"
+            ],
+            "support": {
+                "source": "https://github.com/hisamu/php-xbase/tree/master",
+                "issues": "https://github.com/hisamu/php-xbase/issues"
+            },
+            "time": "2015-12-17 19:18:03"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "hisamu/php-xbase": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": []
+}
