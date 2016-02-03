@@ -2,7 +2,12 @@
 PHP dbf2sql
 -----------
 
-Extracts data from DBF files and imports it into a SQL database. Currently PostgreSQL is supported.
+Extracts data from DBF files and imports it into a SQL database. Only PostgreSQL is supported at the moment.
+
+## Dependencies
+
+* PHP >= 5.3
+* Composer
 
 ## Installation
 
@@ -10,7 +15,7 @@ Extracts data from DBF files and imports it into a SQL database. Currently Postg
 
 ## Usage
 
-    dbf2pg.php /path/to/file.dbf [encoding]
+    php -q dbf2pg.php /path/to/file.dbf [encoding]
     
 ## Examples
 
