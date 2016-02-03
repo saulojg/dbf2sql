@@ -1,5 +1,11 @@
 <?php
 
+// Check that data *can* be added to database (rollback all changes)
+define('DRY_RUN', false);
+
+// Insert all or nothing
+define('TRANSACTIONAL', false);
+
 require __DIR__ . '/vendor/autoload.php';
 
 use XBase\Table;
@@ -15,7 +21,9 @@ $encoding = isset($argv[2]) ? $argv[2] : null;
 
 $table = new Table($file, null, $encoding);
 
-echo "begin work; \n"; // only for testing
+if(TRANSACTIONAL || DRY_RUN)
+    echo "begin work; \n";
+
 echo DBase2PostgreSQL::getCreateTableSentence($table) . "\n";
 
 $first = true;
@@ -32,4 +40,7 @@ while ($record = $table->nextRecord()) {
 
 echo ";";
 
-echo "rollback; \n"; // only for testing
+if(TRANSACTIONAL)
+    echo "commit\n";
+elseif(DRY_RUN)
+    echo "rollback; \n";
