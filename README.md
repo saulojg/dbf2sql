@@ -15,16 +15,16 @@ Extracts data from DBF files and imports it into a SQL database. Only PostgreSQL
 
 ## Usage
 
-    php -q dbf2pg.php /path/to/file.dbf [encoding]
+    php -q dbf2sql.php /path/to/file.dbf [encoding]
     
 ## Examples
 
 
-    time php -q dbf2pg.php /path/to/file.dbf CP1251 > test.sql
+    time php -q dbf2sql.php /path/to/file.dbf CP1251 > test.sql
     
 or
 
-    time php -q dbf2pg.php /path/to/file.dbf CP1251 | psql database username    
+    time php -q dbf2sql.php /path/to/file.dbf CP1251 | psql database username    
     
 ## Contact
 
