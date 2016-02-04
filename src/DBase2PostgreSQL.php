@@ -39,7 +39,9 @@ class DBase2PostgreSQL
 
         switch($column->getType()){
             case Record::DBFFIELD_TYPE_CHAR:
-                return "character varying ($length)";
+                return "text";
+            case Record::DBFFIELD_TYPE_MEMO:
+                return "text";
             case Record::DBFFIELD_TYPE_DATE:
                 return "timestamp without time zone";
             case Record::DBFFIELD_TYPE_DATETIME:
@@ -52,6 +54,8 @@ class DBase2PostgreSQL
                 return "numeric ($length, " . $column->getDecimalCount() . ")";
             case Record::DBFFIELD_TYPE_LOGICAL:
                 return "boolean";
+            default:
+                throw new \Exception("Unsupported column type " . $column->getType() );
         }
     }
 
@@ -81,17 +85,9 @@ class DBase2PostgreSQL
 
         switch($column->getType()){
             case Record::DBFFIELD_TYPE_CHAR:
-                $length = mb_strlen($value);
-                if($length==0)
-                    return "''";
-                elseif($length>$column->getLength()){
-                    // Monitoring strange cases (corrupt DBF?)
-                    $stderr = fopen('php://stderr', 'w+');
-                    fwrite($stderr, "Following value truncated to " . $column->getLength() . " chars: " . trim($value) . "\n");
-                    fclose($stderr);
-                    $value = mb_substr($value, $column->getLength());
-                }
-                return '$$' . str_replace('$','\$', $value) . '$$';
+                return self::getStringFormatted($value, $column);
+            case Record::DBFFIELD_TYPE_MEMO:
+                return self::getStringFormatted($value, $column);
             case Record::DBFFIELD_TYPE_DATE:
                 return "to_timestamp($value)";
             case Record::DBFFIELD_TYPE_DATETIME:
@@ -105,6 +101,20 @@ class DBase2PostgreSQL
             case Record::DBFFIELD_TYPE_LOGICAL:
                 return "'" . ((int) $value) . "'";
         }
+    }
+
+    private static function getStringFormatted($value, Column $column){
+        $length = mb_strlen($value);
+        if($length==0)
+            return "''";
+        elseif($length>$column->getLength()){
+            // Monitoring strange cases (corrupt DBF?)
+            $stderr = fopen('php://stderr', 'w+');
+            fwrite($stderr, "Following value truncated to " . $column->getLength() . " chars: " . trim($value) . "\n");
+            fclose($stderr);
+            $value = mb_substr($value, $column->getLength());
+        }
+        return "'" . str_replace("'", "\\'", $value) . "'";
     }
 
 }
