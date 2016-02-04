@@ -87,11 +87,11 @@ class DBase2PostgreSQL
                 elseif($length>$column->getLength()){
                     // Monitoring strange cases (corrupt DBF?)
                     $stderr = fopen('php://stderr', 'w+');
-                    fwrite($stderr, "Following value truncated to " . $column->getLength() . " chars: " . trim($value));
+                    fwrite($stderr, "Following value truncated to " . $column->getLength() . " chars: " . trim($value) . "\n");
                     fclose($stderr);
                     $value = mb_substr($value, $column->getLength());
                 }
-                return '$$' . str_replace('$','\$', $value).'$$';
+                return '$$' . str_replace('$','\$', $value) . '$$';
             case Record::DBFFIELD_TYPE_DATE:
                 return "to_timestamp($value)";
             case Record::DBFFIELD_TYPE_DATETIME:
