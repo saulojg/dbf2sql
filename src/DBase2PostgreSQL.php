@@ -35,7 +35,7 @@ class DBase2PostgreSQL
     }
 
     static private function getSQLType(Column $column){
-        $length = min($column->getLength(), 1);
+        $length = max($column->getLength(), 1);
 
         switch($column->getType()){
             case Record::DBFFIELD_TYPE_CHAR:
