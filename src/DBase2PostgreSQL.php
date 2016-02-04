@@ -35,7 +35,7 @@ class DBase2PostgreSQL
     }
 
     static private function getSQLType(Column $column){
-        $length = $column->getLength();
+        $length = min($column->getLength(), 1);
 
         switch($column->getType()){
             case Record::DBFFIELD_TYPE_CHAR:
@@ -50,6 +50,8 @@ class DBase2PostgreSQL
                 return "numeric ($length, " . $column->getDecimalCount() . ")";
             case Record::DBFFIELD_TYPE_NUMERIC:
                 return "numeric ($length, " . $column->getDecimalCount() . ")";
+            case Record::DBFFIELD_TYPE_LOGICAL:
+                return "boolean";
         }
     }
 
@@ -81,7 +83,7 @@ class DBase2PostgreSQL
             case Record::DBFFIELD_TYPE_CHAR:
                 if(strlen($value)==0)
                     return "''";
-                return '$$' . $value.'$$';
+                return '$$' . str_replace('$','\$', $value).'$$';
             case Record::DBFFIELD_TYPE_DATE:
                 return "to_timestamp($value)";
             case Record::DBFFIELD_TYPE_DATETIME:
@@ -92,6 +94,8 @@ class DBase2PostgreSQL
                 return $value;
             case Record::DBFFIELD_TYPE_NUMERIC:
                 return $value;
+            case Record::DBFFIELD_TYPE_LOGICAL:
+                return (int) $value;
         }
     }
 

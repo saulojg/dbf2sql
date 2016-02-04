@@ -6,6 +6,10 @@ define('DRY_RUN', false);
 // Insert all or nothing
 define('TRANSACTIONAL', false);
 
+// Create schema only
+define('DISABLE_INSERTS', false);
+
+
 require __DIR__ . '/vendor/autoload.php';
 
 use XBase\Table;
@@ -26,19 +30,23 @@ if(TRANSACTIONAL || DRY_RUN)
 
 echo DBase2PostgreSQL::getCreateTableSentence($table) . "\n";
 
-$first = true;
-while ($record = $table->nextRecord()) {
-    if($first) {
-        echo DBase2PostgreSQL::getInsertSentenceBegin($table) . "\n";
-        $first = false;
-    }else{
-        echo "\t, ";
+
+if(!DISABLE_INSERTS) {
+    $first = true;
+    while ($record = $table->nextRecord()) {
+        if ($first) {
+            echo DBase2PostgreSQL::getInsertSentenceBegin($table) . "\n";
+            $first = false;
+        } else {
+            echo "\t, ";
+        }
+
+        echo DBase2PostgreSQL::getInsertSentenceValues($record) . "\n";
     }
 
-    echo DBase2PostgreSQL::getInsertSentenceValues($record) . "\n";
+    if(!$first)
+        echo ";";
 }
-
-echo ";";
 
 if(TRANSACTIONAL)
     echo "commit\n";
