@@ -9,7 +9,6 @@ define('TRANSACTIONAL', false);
 // Create schema only
 define('DISABLE_INSERTS', false);
 
-
 require __DIR__ . '/vendor/autoload.php';
 
 use XBase\Table;
@@ -29,7 +28,6 @@ if(TRANSACTIONAL || DRY_RUN)
     echo "begin work; \n";
 
 echo DBase2PostgreSQL::getCreateTableSentence($table) . "\n";
-
 
 if(!DISABLE_INSERTS) {
     $first = true;
