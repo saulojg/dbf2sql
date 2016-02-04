@@ -81,8 +81,16 @@ class DBase2PostgreSQL
 
         switch($column->getType()){
             case Record::DBFFIELD_TYPE_CHAR:
-                if(strlen($value)==0)
+                $length = mb_strlen($value);
+                if($length==0)
                     return "''";
+                elseif($length>$column->getLength()){
+                    // Monitoring strange cases (corrupt DBF?)
+                    $stderr = fopen('php://stderr', 'w+');
+                    fwrite($stderr, "Following value truncated to " . $column->getLength() . " chars: " . trim($value));
+                    fclose($stderr);
+                    $value = mb_substr($value, $column->getLength());
+                }
                 return '$$' . str_replace('$','\$', $value).'$$';
             case Record::DBFFIELD_TYPE_DATE:
                 return "to_timestamp($value)";
