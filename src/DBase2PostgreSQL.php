@@ -95,7 +95,7 @@ class DBase2PostgreSQL
             case Record::DBFFIELD_TYPE_NUMERIC:
                 return $value;
             case Record::DBFFIELD_TYPE_LOGICAL:
-                return (int) $value;
+                return "'" . ((int) $value) . "'";
         }
     }
 
