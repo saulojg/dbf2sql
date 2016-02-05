@@ -114,6 +114,9 @@ class DBase2PostgreSQL
             fclose($stderr);
             $value = mb_substr($value, $column->getLength());
         }
+        // escape \
+        $value = str_replace('\\','\\\\', $value);
+        // quote and escape '
         return "'" . str_replace("'", "\\'", $value) . "'";
     }
 
