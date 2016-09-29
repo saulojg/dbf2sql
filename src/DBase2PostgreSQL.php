@@ -117,7 +117,7 @@ class DBase2PostgreSQL
         // escape \
         $value = str_replace('\\','\\\\', $value);
         // quote and escape '
-        return "'" . str_replace("'", "\\'", $value) . "'";
+        return "E'" . str_replace("'", "\\'", $value) . "'";
     }
 
 }
