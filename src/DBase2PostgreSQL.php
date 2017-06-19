@@ -93,11 +93,11 @@ class DBase2PostgreSQL
             case Record::DBFFIELD_TYPE_DATETIME:
                 return "to_timestamp($value)";
             case Record::DBFFIELD_TYPE_DOUBLE:
-                return $value;
+                return $record->getDouble($column->getName());
             case Record::DBFFIELD_TYPE_FLOATING:
-                return $value;
+                return $record->getFloat($column->getName());
             case Record::DBFFIELD_TYPE_NUMERIC:
-                return $value;
+                return $record->getNum($column->getName());
             case Record::DBFFIELD_TYPE_LOGICAL:
                 return "'" . ((int) $value) . "'";
         }
