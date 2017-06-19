@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a6c725586c53e5b16a682795de4ec1b",
+    "hash": "a78139e075cca146f8cf8349157c1795",
     "content-hash": "fb3dbaa40eec949ca436cfc892b72aba",
     "packages": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hisamu/php-xbase.git",
-                "reference": "9cebc632b78f8c5b894292351ea9edbf0e61f597"
+                "reference": "26ceae6c7ca67d67132b5c1108e5e2906343631d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hisamu/php-xbase/zipball/9cebc632b78f8c5b894292351ea9edbf0e61f597",
-                "reference": "9cebc632b78f8c5b894292351ea9edbf0e61f597",
+                "url": "https://api.github.com/repos/hisamu/php-xbase/zipball/26ceae6c7ca67d67132b5c1108e5e2906343631d",
+                "reference": "26ceae6c7ca67d67132b5c1108e5e2906343631d",
                 "shasum": ""
             },
             "require": {
@@ -30,6 +30,9 @@
                     "XBase": "src/"
                 }
             },
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Luã de Souza",
@@ -40,17 +43,17 @@
                     "email": "info@cyane.nl"
                 }
             ],
-            "description": "A simple parser for *.dbf files using PHP",
+            "description": "A simple parser for *.dbf, *.fpt files using PHP",
             "homepage": "https://github.com/hisamu/php-xbase",
             "keywords": [
                 "dbase",
                 "foxpro"
             ],
             "support": {
-                "source": "https://github.com/hisamu/php-xbase/tree/master",
+                "source": "https://github.com/hisamu/php-xbase/tree/1.0.5",
                 "issues": "https://github.com/hisamu/php-xbase/issues"
             },
-            "time": "2015-12-17 19:18:03"
+            "time": "2017-01-09 22:28:13"
         }
     ],
     "packages-dev": [],
