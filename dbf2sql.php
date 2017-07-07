@@ -9,6 +9,9 @@ define('TRANSACTIONAL', false);
 // Create schema only
 define('DISABLE_INSERTS', false);
 
+// Amount of rows to insert per transaction
+define('CHUNK_SIZE', 1000);
+
 require __DIR__ . '/vendor/autoload.php';
 
 use XBase\Table;
@@ -30,19 +33,28 @@ if(TRANSACTIONAL || DRY_RUN)
 echo DBase2PostgreSQL::getCreateTableSentence($table) . "\n";
 
 if(!DISABLE_INSERTS) {
-    $first = true;
+    $issueInsert = true;
+    $insertRowCount = 0;
     while ($record = $table->nextRecord()) {
-        if ($first) {
+        if ($issueInsert) {
             echo DBase2PostgreSQL::getInsertSentenceBegin($table) . "\n";
-            $first = false;
+            $issueInsert = false;
         } else {
             echo "\t, ";
         }
 
         echo DBase2PostgreSQL::getInsertSentenceValues($record) . "\n";
+
+        $insertRowCount++;
+
+        if(CHUNK_SIZE>0 && $insertRowCount >= CHUNK_SIZE){
+            $issueInsert = true;
+            $insertRowCount = 0;
+            echo ";";
+        }
     }
 
-    if(!$first)
+    if(!$issueInsert)
         echo ";";
 }
 
